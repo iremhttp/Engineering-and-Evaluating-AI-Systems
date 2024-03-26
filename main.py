@@ -7,7 +7,7 @@ seed =0
 random.seed(seed)
 np.random.seed(seed)
 
-
+#deneme
 def load_data():
     #load the input data
     df = get_input_data()
