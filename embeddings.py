@@ -6,6 +6,7 @@ seed =0
 random.seed(seed)
 np.random.seed(seed)
 
+#Concatenates the Ticket Summary and Interaction content and uses tfidf. So that we can feed the algorithm with the concatenated taxt and predict label in y column.
 def get_tfidf_embd(df:pd.DataFrame):
     from sklearn.feature_extraction.text import TfidfVectorizer
     tfidfconverter = TfidfVectorizer(max_features=2000, min_df=4, max_df=0.90)

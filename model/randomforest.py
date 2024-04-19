@@ -42,4 +42,3 @@ class RandomForest(BaseModel):
 
     def data_transform(self) -> None:
         ...
-

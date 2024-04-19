@@ -1,7 +1,7 @@
 from model.randomforest import RandomForest
 
 
-
+#Implements Random forest by using data_model.py
 def model_predict(data, df, name):
     results = []
     print("RandomForest")

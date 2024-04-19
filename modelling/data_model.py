@@ -7,6 +7,8 @@ seed =0
 random.seed(seed)
 np.random.seed(seed)
 
+#preprocesses and splits the data for modeling tasks, ensuring that classes with insufficient samples are excluded from the training process.
+# It provides methods to access different parts of the data.
 class Data():
     def __init__(self,
                  X: np.ndarray,
@@ -15,6 +17,8 @@ class Data():
         y = df.y.to_numpy()
         y_series = pd.Series(y)
 
+#checks if classes have more than 3 occurances, if no such classes found, sends messages and sets self.X_train to None.
+
         good_y_value = y_series.value_counts()[y_series.value_counts() >= 3].index
 
         if len(good_y_value)<1:
@@ -22,6 +26,7 @@ class Data():
             self.X_train = None
             return
 
+#if there are classes have more than 3 occ, it filters the embeddings (X_good) and target variable (y_good) based on these classes.
         y_good = y[y_series.isin(good_y_value)]
         X_good = X[y_series.isin(good_y_value)]
 

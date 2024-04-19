@@ -3,6 +3,7 @@ import re
 from Config import *
 
 
+#Assigns types
 def get_input_data()->pd.DataFrame:
     df1 = pd.read_csv("data//AppGallery.csv", skipinitialspace=True)
     df1.rename(columns={'Type 1': 'y1', 'Type 2': 'y2', 'Type 3': 'y3', 'Type 4': 'y4'}, inplace=True)
@@ -15,6 +16,7 @@ def get_input_data()->pd.DataFrame:
     df = df.loc[(df["y"] != '') & (~df["y"].isna()),]
     return df
 
+#Creates Ticket_id and deletes duplicates.
 def de_duplication(data: pd.DataFrame):
     data["ic_deduplicated"] = ""
 
@@ -109,6 +111,7 @@ def de_duplication(data: pd.DataFrame):
     data = data.drop(columns=['ic_deduplicated'])
     return data
 
+#Deleting the unnecessary lines from emails.
 def noise_remover(df: pd.DataFrame):
     noise = "(sv\s*:)|(wg\s*:)|(ynt\s*:)|(fw(d)?\s*:)|(r\s*:)|(re\s*:)|(\[|\])|(aspiegel support issue submit)|(null)|(nan)|((bonus place my )?support.pt 自动回复:)"
     df[Config.TICKET_SUMMARY] = df[Config.TICKET_SUMMARY].str.lower().replace(noise, " ", regex=True).replace(r'\s+', ' ', regex=True).str.strip()
@@ -164,6 +167,7 @@ def noise_remover(df: pd.DataFrame):
     #print(df.shape)
     return df
 
+# translating the mails (not working)
 def translate_to_en(texts:list[str]):
     import stanza
     from stanza.pipeline.core import DownloadMethod
