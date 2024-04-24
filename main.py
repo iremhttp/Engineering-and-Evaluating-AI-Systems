@@ -1,3 +1,6 @@
+
+import warnings 
+warnings.filterwarnings('ignore')
 from preprocess import *
 from embeddings import *
 from modelling.modelling import *
@@ -7,7 +10,7 @@ seed =0
 random.seed(seed)
 np.random.seed(seed)
 
-#deneme
+
 def load_data():
     #load the input data
     df = get_input_data()
@@ -26,8 +29,8 @@ def get_embeddings(df:pd.DataFrame):
     X = get_tfidf_embd(df)  # get tf-idf embeddings
     return X, df
 
-def get_data_object(X: np.ndarray, df: pd.DataFrame):
-    return Data(X, df)
+def get_data_object(X: np.ndarray, df: pd.DataFrame, is_2d: bool):
+    return Data(X, df, is_2d)
 
 def perform_modelling(data: Data, df: pd.DataFrame, name):
     model_predict(data, df, name)
@@ -39,8 +42,11 @@ if __name__ == '__main__':
     df[Config.TICKET_SUMMARY] = df[Config.TICKET_SUMMARY].values.astype('U')
     grouped_df = df.groupby(Config.GROUPED)
     for name, group_df in grouped_df:
-        print(name)
+        print(f"Processing group: {name}")
         X, group_df = get_embeddings(group_df)
-        data = get_data_object(X, group_df)
-        perform_modelling(data, group_df, name)
+        for dimension in (1, 2, 3):  # 1D, 2D, and 3D
+            print(f"Processing {dimension}D version for {name}")
+            data = get_data_object(X, group_df, dimension)
+            if data.X_train is not None: 
+                perform_modelling(data, group_df, f"{name} - {dimension}D")
 

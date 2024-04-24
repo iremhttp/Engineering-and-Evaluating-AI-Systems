@@ -37,7 +37,15 @@ class RandomForest(BaseModel):
         self.predictions = predictions
 
     def print_results(self, data):
-        print(classification_report(data.y_test, self.predictions))
+        # Determine the dimensionality of y_test and handle accordingly
+        if data.y_test.ndim == 1:
+            print("Classification Report:")
+            print(classification_report(data.y_test, self.predictions, zero_division=0))
+        else:
+            for i in range(data.y_test.shape[1]):
+                print(f"Accuracy for output {i}: {accuracy_score(data.y_test[:, i], self.predictions[:, i]):.2f}")
+                #print(f"Classification report for output {i}:")
+                print(classification_report(data.y_test[:, i], self.predictions[:, i], zero_division=0))
 
 
     def data_transform(self) -> None:

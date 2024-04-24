@@ -14,6 +14,7 @@ def get_input_data()->pd.DataFrame:
     df[Config.TICKET_SUMMARY] = df[Config.TICKET_SUMMARY].values.astype('U')
     df["y"] = df[Config.CLASS_COL]
     df = df.loc[(df["y"] != '') & (~df["y"].isna()),]
+    df.fillna(method='ffill', inplace=True)
     return df
 
 #Creates Ticket_id and deletes duplicates.
