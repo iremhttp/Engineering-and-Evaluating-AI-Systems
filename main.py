@@ -29,8 +29,8 @@ def get_embeddings(df:pd.DataFrame):
     X = get_tfidf_embd(df)  # get tf-idf embeddings
     return X, df
 
-def get_data_object(X: np.ndarray, df: pd.DataFrame, is_2d: bool):
-    return Data(X, df, is_2d)
+def get_data_object(X: np.ndarray, df: pd.DataFrame,  dimension: int):
+    return Data(X, df,  dimension)
 
 def perform_modelling(data: Data, df: pd.DataFrame, name):
     model_predict(data, df, name)
