@@ -42,11 +42,12 @@ if __name__ == '__main__':
     df[Config.TICKET_SUMMARY] = df[Config.TICKET_SUMMARY].values.astype('U')
     grouped_df = df.groupby(Config.GROUPED)
     for name, group_df in grouped_df:
+
         print(f"Processing group: {name}")
         X, group_df = get_embeddings(group_df)
         for dimension in (1, 2, 3):  # 1D, 2D, and 3D
+            print("-------------------------------")
             print(f"Processing {dimension}D version for {name}")
             data = get_data_object(X, group_df, dimension)
             if data.X_train is not None:
                 perform_modelling(data, group_df, f"{name} - {dimension}D")
-
