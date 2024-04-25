@@ -1,5 +1,5 @@
 
-import warnings 
+import warnings
 warnings.filterwarnings('ignore')
 from preprocess import *
 from embeddings import *
@@ -47,6 +47,6 @@ if __name__ == '__main__':
         for dimension in (1, 2, 3):  # 1D, 2D, and 3D
             print(f"Processing {dimension}D version for {name}")
             data = get_data_object(X, group_df, dimension)
-            if data.X_train is not None: 
+            if data.X_train is not None:
                 perform_modelling(data, group_df, f"{name} - {dimension}D")
 

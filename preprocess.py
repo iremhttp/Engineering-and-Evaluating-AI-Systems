@@ -168,7 +168,7 @@ def noise_remover(df: pd.DataFrame):
     #print(df.shape)
     return df
 
-# translating the mails (not working)
+# translating the mails
 def translate_to_en(texts:list[str]):
     import stanza
     from stanza.pipeline.core import DownloadMethod

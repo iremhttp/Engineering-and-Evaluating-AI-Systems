@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from model.base import BaseModel
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from numpy import *
 import random
 num_folds = 0
@@ -15,7 +15,7 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 pd.set_option('display.max_colwidth', 200)
 
-
+# encapsulates functionality related to training, predicting, and evaluating a random forest classifier model.
 class RandomForest(BaseModel):
     def __init__(self,
                  model_name: str,
