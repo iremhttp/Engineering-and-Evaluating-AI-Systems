@@ -71,3 +71,8 @@ class Data():
         return self.X_DL_test
     def get_X_DL_train(self):
         return self.X_DL_train
+    def get_reduced_y(self, level):
+        if level == 2:
+            return np.array([y[:-1] for y in self.y_good])  # Return only first two types
+        elif level == 1:
+            return np.array([y[0] for y in self.y_good])  # Return only the first type
